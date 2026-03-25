@@ -1,0 +1,55 @@
+
+input[type=submit]{
+    background-color:  #4d6b88;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+/* label{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;   
+    font-size: small;
+} */
+
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+header{
+    text-align: center;
+    margin: 50px;
+}
+
+main{
+    align-content: right;
+}
+
+.container{
+    display: flex;
+    background-color: #273b4e;
+    align-items: right;
+    color: whitesmoke;   
+    flex-direction: column; 
+}
+
+.container form{
+    padding: 10px;
+    font-size: medium;
+}
+
+.container button{
+        background-color:  #4d6b88;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    padding: 4px;
+}
+
+.containerGame{
+    display: flex;
+    background-color: #273b4e;
+    align-items: center;
+    color: whitesmoke;   
+    flex-direction: row; 
+}

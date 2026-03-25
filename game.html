@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Jack</title>
+    <script src="./js/app.js" defer></script>
+    <link href="./Styles/index.css" rel="stylesheet"/>
+</head>
+<body>
+    <header>
+        <div class="">
+            <h1>Black Jack</h1>
+        </div>
+    </header>
+    <main>
+        <section class="containerGame">
+            <div class="computer">
+                <!-- <img src="./Images/classic-cards/1.png"/> Kommer lägga in till en variabel som väljer bild efter kort senare -->
+<p>Datorns poäng: </p> <p id="computerPoints"></p>
+
+            </div>
+            <div class="user">
+                <!-- <img src="./Images/classic-cards/1.png"/> Kommer lägga in till en variabel som väljer bild efter kort senare -->
+                <p>Dina poäng: </p><p id="points"></p>
+                <button id="draw">Dra kort</button>
+                <button id="stop">Stanna</button>
+                <input type="number" id="bet" name="Satsa" min="10" max="500" value="10"/>
+                <br><p id="yourBet"></p>
+                <button id="betButton">Satsa</button> <br>   
+                </p>
+
+            </div>
+<div class="result">
+    <p id="resultMessage"></p>
+</div>
+
+<div class="balanceDiv">
+    <label>Saldo</label><p id="balance"></p>
+    <input type="number" id="deposit" name="Deposit" min="100" max="10000" value="100"/>
+    <button id="depositButton">Sätt in</button>    
+</div>
+        </section>
+
+    </main>
+
+</body>
+</html>
