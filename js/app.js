@@ -57,7 +57,7 @@ const startRound = () => {
   displayBalance();
   displayBet();
   deck = createDeck();
-
+  shuffleDeck(deck);
 };
 
 const updateUIstate = () =>{
@@ -138,7 +138,7 @@ const createDeck = () => {
 
     const suits = ["spade", "hearts", "diamonds", "clubs"];
     const ranks = ["A", "2", "3", "4", "5", "6","7","8","9","10","J", "Q", "K"];
-   
+   const newDeck = [];
     
     for (let suit of suits)
     {
@@ -153,7 +153,7 @@ const createDeck = () => {
                 {value = Number(rank);}
 
 
-            deck.push({
+            newDeck.push({
                 suit: suit,
                 rank: rank,
                 value: value
@@ -161,7 +161,21 @@ const createDeck = () => {
         }
     }
 
-    return deck;
+    return newDeck;
+}
+
+const shuffleDeck = (myDeck) => {
+
+    let currentIndex = myDeck.length;
+
+    while(currentIndex != 0)
+    {
+        let randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [myDeck[currentIndex], myDeck[randomIndex]] =
+        [myDeck[randomIndex], myDeck[currentIndex]];
+    }
 }
 
 
