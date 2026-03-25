@@ -100,25 +100,35 @@ const result = () => {
 
 
 const playerTurn = () => {
+
     
-    if (playerTotal < 21) {
-        playerTotal += Math.floor(Math.random() * (11 - 2 + 1)) + 2;
+    if (playerTotal < 21){
+
+        if(deck.length == 0) { result();}
+        playerTotal += deck[0].value;
+
+        //skapa kortnamnet här så bilden kan tas fram?
+        //let imgName = deck.rank + "_of_" + deck.suit + ".png";
+
+        deck.shift();
+
         updateDisplay();
 
-        if (playerTotal > 21) {
+        if (playerTotal > 21){
             result();
         }
     }
-    
+
 }
 
-const computerTurn =  () =>{
-    
-    while(computerTotal < 17)
-        {        
-            computerTotal += Math.floor(Math.random() * (11 - 2 + 1)) + 2;
-            updateCompDisplay();
-        }
+const computerTurn =  () =>{    
+
+    while (computerTotal < 17){
+        computerTotal += deck[0].value;
+        deck.shift();
+        updateCompDisplay();
+    }
+
         
     result();
     
@@ -136,8 +146,8 @@ const addBalance = () => {
 
 const createDeck = () => {
 
-    const suits = ["spade", "hearts", "diamonds", "clubs"];
-    const ranks = ["A", "2", "3", "4", "5", "6","7","8","9","10","J", "Q", "K"];
+    const suits = ["spades", "hearts", "diamonds", "clubs"];
+    const ranks = ["ace", "2", "3", "4", "5", "6","7","8","9","10","jack", "queen", "king"];
    const newDeck = [];
     
     for (let suit of suits)
@@ -145,9 +155,9 @@ const createDeck = () => {
         for(let rank of ranks)
         {
             let value;
-            if(rank === "A")
+            if(rank === "ace")
                 {value = 11;}
-            else if(rank === "J" || rank === "Q" || rank === "K")
+            else if(rank === "jack" || rank === "queen" || rank === "king")
                 {value = 10;}
             else
                 {value = Number(rank);}
