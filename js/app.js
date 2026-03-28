@@ -7,6 +7,9 @@ let playerBet = 0;
 let deck = [];
 let playerHand = [];
 let computerHand = [];
+let playerHandAces = 0;
+let computerHandAces = 0;
+
 
 const counterDisplay = document.getElementById("points");
 const compCounterDisplay = document.getElementById("computerPoints");
@@ -57,6 +60,8 @@ const startRound = () => {
 
   playerTotal = 0;
   computerTotal = 0;
+  playerHandAces = 0;
+  computerHandAces = 0;
 
   resultDisplay.innerText = "";
 
@@ -182,14 +187,25 @@ const initialCards = () =>{
     drawCardToComputer();
     drawCardToComputer();
 
-    if(playerTotal == 21 ) result();
+    if(playerTotal == 21 || computerTotal > 21) result();
 }
 
-const drawCardToPlayer = () =>{
+const drawCardToPlayer = () =>{  
     
-    
-       playerTotal += deck[0].value;
+       playerTotal += deck[0].value;       
        playerHand.push(deck[0]);
+
+       if(deck[0].rank == "ace")
+       {
+        playerHandAces++;
+       }
+
+       while(playerTotal > 21 && playerHandAces > 0){
+        playerTotal -= 10;
+        playerHandAces--;
+       }
+
+
        deck.shift();
        updateDisplay(); 
        renderPlayerHand();
@@ -199,6 +215,18 @@ const drawCardToPlayer = () =>{
 const drawCardToComputer = () =>{
   computerTotal += deck[0].value;
   computerHand.push(deck[0]);
+
+if(deck[0].rank == "ace")
+{
+    computerHandAces++;
+}
+
+while(computerTotal > 21 && computerHandAces > 0)
+{
+    computerTotal-= 10;
+    computerHandAces--;
+}
+
   deck.shift();
   updateCompDisplay();
   renderComputerHand();
