@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Jack</title>
     <script src="./js/app.js" defer></script>
-    <link href="./Styles/index.css" rel="stylesheet"/>
+    <link href="./Styles/game.css" rel="stylesheet"/>
 </head>
 <body>
     <header>
@@ -16,13 +16,16 @@
     <main>
         <section class="containerGame">
             <div class="computer">
-                <!-- <img src="./Images/classic-cards/1.png"/> Kommer lägga in till en variabel som väljer bild efter kort senare -->
+        
 <p>Datorns poäng: </p> <p id="computerPoints"></p>
+<div id="cHand"></div>
 
             </div>
             <div class="user">
                 <!-- <img src="./Images/classic-cards/1.png"/> Kommer lägga in till en variabel som väljer bild efter kort senare -->
                 <p>Dina poäng: </p><p id="points"></p>
+                <p>Din hand: </p>
+                <div id="pHand"></div>
                 <button id="draw">Dra kort</button>
                 <button id="stop">Stanna</button>
                 <input type="number" id="bet" name="Satsa" min="10" max="500" value="10"/>

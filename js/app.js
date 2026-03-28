@@ -1,3 +1,4 @@
+
 let playerTotal = 0;
 let computerTotal = 0;
 let gameOver = true;
@@ -16,6 +17,7 @@ const balanceDisplay = document.getElementById("balance");
 const drawButton = document.getElementById("draw");
 const stopButton = document.getElementById("stop");
 const pHandDisplay = document.getElementById("pHand");
+const cHandDisplay = document.getElementById("cHand");
 
 const updateDisplay = () => { counterDisplay.innerText = playerTotal; }
 const updateCompDisplay = () => { compCounterDisplay.innerText = computerTotal;}
@@ -50,8 +52,9 @@ const startRound = () => {
     gameOver = false;
     updateUIstate();
 
-    // playerHand = [];
-    // computerHand = [];
+    playerHand = [];
+    computerHand = [];
+
   playerTotal = 0;
   computerTotal = 0;
 
@@ -61,6 +64,8 @@ const startRound = () => {
   updateCompDisplay();
   displayBalance();
   displayBet();
+  renderComputerHand();
+  renderPlayerHand();
 
   deck = createDeck();
   shuffleDeck(deck);
@@ -75,29 +80,66 @@ const updateUIstate = () =>{
     stopButton.disabled = gameOver;
 }
 
+const renderPlayerHand = () =>{
+
+    pHandDisplay.innerHTML = "";
+
+    for(let i = 0; i < playerHand.length; i++){
+
+        let image = document.createElement('img');      
+        image.src = "./Images/PNG-cards/" + playerHand[i].image;
+        image.height = 100;
+
+        pHandDisplay.appendChild(image);
+    }
+
+}
+
+const renderComputerHand = () =>{
+
+    cHandDisplay.innerHTML = "";
+
+        for (let i = 0; i < computerHand.length; i++) {
+
+            let image = document.createElement("img");
+            image.height = 100;
+
+            if(i == 0 && !gameOver)
+            {
+                image.src = "./Images/classic-cards/b2fv.png";                
+            }
+            else{                
+                image.src = "./Images/PNG-cards/" + computerHand[i].image;            
+            }
+
+            cHandDisplay.appendChild(image);
+
+        }
+
+}
+
 const result = () => {
 
     gameOver = true;
     updateUIstate();
+    renderComputerHand();
+    renderPlayerHand();
 
-    if(playerTotal == 21 ){
-        resultDisplay.innerText = "Spelaren vinner rundan";        
+    if (playerTotal == computerTotal) {
+      resultDisplay.innerText = "Oavgjort";
+      payout();
+    } else if (playerTotal > 21) {
+      resultDisplay.innerText = "Över 21. Spelaren förlorar rundan";
+    } else if (playerTotal == 21) {
+      resultDisplay.innerText = "Spelaren vinner rundan";
+      payout();
+    } else {
+      if (playerTotal > computerTotal || computerTotal > 21) {
+        resultDisplay.innerText = "Spelaren vinner rundan";
         payout();
-    }
-    else if(playerTotal > 21){
-        resultDisplay.innerText = "Över 21. Spelaren förlorar rundan";
-    }
-    else
-    {
-        if (playerTotal > computerTotal || computerTotal > 21)
-        {
-            resultDisplay.innerText = "Spelaren vinner rundan";
-            payout();          
-        }
-        else{
-            resultDisplay.innerText = "Datorn vinner rundan";
-            
-        }
+      } else {
+        resultDisplay.innerText = "Datorn vinner rundan";
+      }
     }
     
     resultDisplay.innerText = "\nPlacera ett bet för att starta en ny runda"
@@ -109,7 +151,6 @@ const result = () => {
 
 
 const playerTurn = () => {
-
     
     if (playerTotal < 21){
 
@@ -117,7 +158,7 @@ const playerTurn = () => {
 
         drawCardToPlayer();
 
-        if (playerTotal > 21){
+        if (playerTotal >= 21){
             result();
         }
     }
@@ -141,7 +182,7 @@ const initialCards = () =>{
     drawCardToComputer();
     drawCardToComputer();
 
-    if(playerTotal == 21 || computerTotal == 21) result();
+    if(playerTotal == 21 ) result();
 }
 
 const drawCardToPlayer = () =>{
@@ -149,27 +190,29 @@ const drawCardToPlayer = () =>{
     
        playerTotal += deck[0].value;
        playerHand.push(deck[0]);
-       console.log("Player draws", deck[0]); //tas bort senare
        deck.shift();
-       updateDisplay();
-       
-    //    for(let card of playerHand)
-    //    {
-    //        pHandDisplay.innerText(card.image);
-
-    //    }
+       updateDisplay(); 
+       renderPlayerHand();
+    
 }
 
 const drawCardToComputer = () =>{
   computerTotal += deck[0].value;
   computerHand.push(deck[0]);
-  console.log("Computer draws", deck[0]); //tas bort senare
   deck.shift();
   updateCompDisplay();
+  renderComputerHand();
 }
 
 const payout =() =>{
-    balance += playerBet * 2;
+    if(playerTotal == computerTotal)
+    {
+        balance += playerBet;
+    }
+    else
+    {
+        balance += playerBet * 2;
+    }
 }
 
 const addBalance = () => {
