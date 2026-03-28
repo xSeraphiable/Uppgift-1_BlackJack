@@ -1,14 +1,16 @@
 
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 let playerTotal = 0;
 let computerTotal = 0;
 let gameOver = true;
-let balance = 100;
+// let balance = currentUser.balance;
 let playerBet = 0;
 let deck = [];
 let playerHand = [];
 let computerHand = [];
 let playerHandAces = 0;
 let computerHandAces = 0;
+
 
 
 const counterDisplay = document.getElementById("points");
@@ -25,7 +27,7 @@ const cHandDisplay = document.getElementById("cHand");
 const updateDisplay = () => { counterDisplay.innerText = playerTotal; }
 const updateCompDisplay = () => { compCounterDisplay.innerText = computerTotal;}
 const displayBet = () =>{ yourBet.innerText = playerBet;}
-const displayBalance = () =>{balanceDisplay.innerText = balance}
+const displayBalance = () =>{balanceDisplay.innerText = currentUser.balance}
 
 drawButton.disabled = gameOver;
 stopButton.disabled = gameOver;
@@ -41,11 +43,11 @@ const placeBet = () => {
     
     let getPlayerBet = Number(document.querySelector("#bet").value);
 
-    if (getPlayerBet > balance) return;
+    if (getPlayerBet > currentUser.balance) return;
 
     playerBet = getPlayerBet;
 
-    balance -= playerBet;
+    currentUser.balance -= playerBet;
 
     startRound();
 }
@@ -94,6 +96,7 @@ const renderPlayerHand = () =>{
         let image = document.createElement('img');      
         image.src = "./Images/PNG-cards/" + playerHand[i].image;
         image.height = 100;
+        image.style.margin = '5px';
 
         pHandDisplay.appendChild(image);
     }
@@ -108,6 +111,7 @@ const renderComputerHand = () =>{
 
             let image = document.createElement("img");
             image.height = 100;
+            image.style.margin = "5px";
 
             if(i == 0 && !gameOver)
             {
@@ -235,17 +239,17 @@ while(computerTotal > 21 && computerHandAces > 0)
 const payout =() =>{
     if(playerTotal == computerTotal)
     {
-        balance += playerBet;
+        currentUser.balance += playerBet;
     }
     else
     {
-        balance += playerBet * 2;
+        currentUser.balance += playerBet * 2;
     }
 }
 
 const addBalance = () => {
 
-    balance += Number(document.querySelector("#deposit").value);
+    currentUser.balance += Number(document.querySelector("#deposit").value);
 
 }
 

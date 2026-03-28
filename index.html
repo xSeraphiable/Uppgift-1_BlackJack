@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Jack</title>
-    <script src="./js/app.js" defer></script>
+    <script src="./js/login.js" defer></script>
     <link href="./Styles/index.css" rel="stylesheet"/>
 </head>
 <body>
@@ -17,10 +17,10 @@
         <section class="container">
             <form class="container">
             <label for="username">Användarnamn:</label>
-            <input type="text" id="username" name="username" placeholder="Ange användarnamn"><br>
+            <input type="text" id="username" placeholder="Ange användarnamn" autocomplete="off"><br>
             <label for="pwd">Lösenord:</label>
-            <input type="password" id="pwd" name="pwd"><br>
-            <input type="submit" value="Logga in" placeholder="Ange lösenord"/>
+            <input type="password" id="pwd"><br>
+            <input type="submit" id="submit" value="Logga in" placeholder="Ange lösenord"/>
             </form>           
             
         </section>
