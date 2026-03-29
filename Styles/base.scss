@@ -1,0 +1,71 @@
+
+$font-base: Arial, sans-serif;
+$font-heading: "Rubik", sans-serif;
+$primary: #FFFFFF;
+$accent1: #e67e22;
+$accent2: #d35400;
+$bg-color: #4A5D23;
+
+$text: #000000;
+$text2: white;
+
+//padding sizes
+$sp: 5px;
+$mp: 8px;
+$lp: 10px;
+
+body {
+  font-family: $font-base;
+  background-color: $bg-color;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  color: white;
+}
+.container{
+    display: grid;
+    gap: 2px;
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+.containerGame {
+    display: grid;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header{
+    display: grid;
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto; 
+}
+
+button {
+  padding: $sp;
+  border: none;
+  border-radius: 5px;
+  background-color: $accent1;
+  color: white;
+  cursor: pointer;
+  
+}
+
+button:hover{
+    background-color: $accent2;
+}
+
+button:disabled{
+    background-color: darkgray;
+    cursor:default;
+}
+
+
+input[type="number"] {
+  padding: $sp;
+  border: none;
+  border-radius: 5px;
+}

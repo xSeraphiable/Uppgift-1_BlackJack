@@ -1,0 +1,98 @@
+@use "base";
+
+// body {
+//   font-family: base.$font-base;
+//   background-color: base.$bg-color;
+//   margin: 0;
+//   color: white;
+// }
+
+header {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.loginHeader h1 {
+  font-family: base.$font-heading;
+   font-size: 2.5rem;
+}
+
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 50vh;
+}
+
+.loginContainer {
+//   padding: 30px;
+//   border-radius: 10px;
+// //   width: 300px;
+// width: 50%;
+// max-width: 350px;
+//   display: flex;
+//   flex-direction: column;
+// //   gap: 10px;
+//   text-align: center;
+
+    background-color: #7c8f52;
+  color: #000000;
+  padding: 40px;
+  width: 350px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  text-align: center;
+ 
+}
+
+
+input {
+    padding: base.$sp;
+    border: none;
+    border-radius: 5px;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.loginForm label {
+    display: block;
+    margin-bottom: 0;
+    text-align: left;
+    color: white;
+    text-shadow: #000000;
+    
+}
+
+.loginForm input[type="submit"] {
+  padding: base.$sp;
+  border: none;
+  border-radius: 5px;
+  background-color: base.$accent1;
+  color: white;  
+  cursor: pointer;
+}
+
+.loginForm input[type="submit"]:hover {
+  background-color: base.$accent2;
+}
+
+.loginForm input, .loginForm input[type="submit"] {
+  padding: 10px 15px;   
+  font-size: 1rem;      
+}
+
+.loginForm input[type="text"]{
+    background-color: #E6F0D4;
+}
+.loginForm input[type="password"]{
+    background-color: #E6F0D4;
+}
+.info {
+  font-size: 0.9rem;  
+  font-style: italic;
+}

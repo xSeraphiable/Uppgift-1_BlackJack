@@ -5,23 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Jack</title>
     <script src="./js/login.js" defer></script>
-    <link href="./Styles/index.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./Styles/index.css">
 </head>
-<body>
+<body >
     <header>
-        <div>
-            <h1 class="">Black Jack</h1>
+        <div class="loginHeader">
+            <h1>Black Jack</h1>
         </div>
     </header>
-    <main>
-        <section class="container">
-            <form class="container">
+    <main  class="loginPage">
+        <section class="loginContainer">
+            <form class="loginForm" id="loginForm">
             <label for="username">Användarnamn:</label>
-            <input type="text" id="username" placeholder="Ange användarnamn" autocomplete="off"><br>
+            <input type="text" id="username" placeholder="Ange användarnamn" autocomplete="off">
+            
             <label for="pwd">Lösenord:</label>
-            <input type="password" id="pwd"><br>
-            <input type="button" id="submit" value="Logga in eller skapa nytt konto"/>
-            <p id="info"></p>
+            <input type="password" id="pwd">
+            
+            <input type="submit" id="submit" value="Logga in / Skapa konto"/>
+            
+            <p class="info" id="info">Om användarnamnet inte finns skapas kontot automatiskt</p>
             </form>           
             
         </section>
