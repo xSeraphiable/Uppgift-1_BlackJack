@@ -1,0 +1,126 @@
+@charset "UTF-8";
+body {
+  font-family: Arial, sans-serif;
+  background-color: #4A5D23;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 60px;
+}
+
+h1 {
+  font-family: "Rubik", sans-serif;
+  font-size: 2.5rem;
+}
+
+.container {
+  display: grid;
+  gap: 2px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.containerGame {
+  display: grid;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+header {
+  display: grid;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+button {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e67e22;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d35400;
+}
+
+button:disabled {
+  background-color: darkgray;
+  cursor: default;
+}
+
+input[type=number] {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+}
+
+/* 1. Ta bort standardmargins */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* 2. Body som flex-column */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* 3. Main tar kvarvarande höjd och centrerar spelet */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center; /* horisontellt centrerat */
+  align-items: center; /* vertikalt centrerat */
+}
+
+/* 4. Container med spelet */
+.containerGame {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* lite mellanrum mellan sektioner */
+  width: 90%;
+  max-width: 800px; /* lagom bredd på stora skärmar */
+  text-align: center;
+}
+
+.player, .computer {
+  min-height: 220px;
+  background-color: #7c8f52;
+  color: #000000;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* 5. Footer/banner längst ner */
+.gameFooter {
+  display: flex;
+  flex-direction: row;
+}
+
+.userinfo, .balanceDiv {
+  width: 100%;
+  gap: 20px;
+  background-color: #222;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+}
+
+/*# sourceMappingURL=game.css.map */

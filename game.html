@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Jack</title>
     <script src="./js/app.js" defer></script>
-    <link rel="stylesheet" href="./Styles/base.css">
+    <link rel="stylesheet" href="./Styles/game.css">
 </head>
 <body>
     <header>
-        <div class="">
+       
             <h1>Black Jack</h1>
-        </div>
+      
     </header>
     <main>
         <section class="containerGame">
@@ -50,17 +50,19 @@
                 <p id="resultMessage"></p>
             </div>
 
-            <!--Balance / deposit-->
-            <div class="balanceDiv">
-                <label>Saldo</label><p id="balance"></p>
-                <input type="number" id="deposit" name="Deposit" min="100" max="10000" value="100"/>
-                <button id="depositButton">Sätt in</button>    
-            </div>
-            
-            <!--User and user control-->
-            <div class="userinfo">
-                <p>Inloggad som: <span id="user"></span></p>
-                <button id="logout">Logga ut</button>
+            <div class="gameFooter">
+                <!--Balance / deposit-->
+                <div class="balanceDiv">
+                    <label>Saldo</label><p id="balance"></p>
+                    <input type="number" id="deposit" name="Deposit" min="100" max="10000" value="100"/>
+                    <button id="depositButton">Sätt in</button>    
+                </div>
+                
+                <!--User and user control-->
+                <div class="userinfo">
+                    <p>Inloggad som: <span id="user"></span></p>
+                    <button id="logout">Logga ut</button>
+                </div>
             </div>
         </section>
 
