@@ -1,13 +1,13 @@
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-let playerTotal = 0;
-let computerTotal = 0;
+let playerScore = 0;
+let computerScore = 0;
 let gameOver = true;
 let playerBet = 0;
 let deck = [];
 let playerHand = [];
 let computerHand = [];
-let playerHandAces = 0;
-let computerHandAces = 0;
+let playerAceCount = 0;
+let computerAceCount = 0;
 
 const counterDisplay = document.getElementById("points");
 const compCounterDisplay = document.getElementById("computerPoints");
@@ -17,91 +17,25 @@ const yourBet = document.getElementById("yourBet");
 const balanceDisplay = document.getElementById("balance");
 const drawButton = document.getElementById("draw");
 const stopButton = document.getElementById("stop");
-const pHandDisplay = document.getElementById("pHand");
-const cHandDisplay = document.getElementById("cHand");
+const playerHandDisplay = document.getElementById("pHand");
+const computerHandDisplay = document.getElementById("cHand");
 
-const updateDisplay = () => {
-  counterDisplay.innerText = playerTotal;
-};
-const updateCompDisplay = () => {
-  compCounterDisplay.innerText = computerTotal;
-};
-const displayBet = () => {
-  yourBet.innerText = playerBet;
-};
-const displayBalance = () => {
-  balanceDisplay.innerText = currentUser.balance;
-};
-
-drawButton.disabled = gameOver;
-stopButton.disabled = gameOver;
-
-//------------------//
-//     Functions    //
-//------------------//
-
-const placeBet = () => {
-  if (!gameOver) return;
-
-  let getPlayerBet = Number(document.querySelector("#bet").value);
-
-  if (getPlayerBet > currentUser.balance) return;
-
-  playerBet = getPlayerBet;
-
-  currentUser.balance -= playerBet;
-  updateBalanceInLS();
-
-  startRound();
-};
-
-const updateBalanceInLS = () => {
-  localStorage.setItem("currentUser", JSON.stringify(currentUser));
-  let users = JSON.parse(localStorage.getItem("user")) || [];
-
-  for (let user of users) {
-    if (currentUser.username == user.username) {
-      user.balance = currentUser.balance;
-    }
-  }
-
-  localStorage.setItem("user", JSON.stringify(users));
-};
-
-const startRound = () => {
-  gameOver = false;
+////////////////////
+// USER INTERFACE //
+////////////////////
+const initiateGameUI = () => {
   updateUIstate();
-
-  playerHand = [];
-  computerHand = [];
-
-  playerTotal = 0;
-  computerTotal = 0;
-  playerHandAces = 0;
-  computerHandAces = 0;
-
-  resultDisplay.innerText = "";
-
-  updateDisplay();
-  updateCompDisplay();
-  displayBalance();
-  displayBet();
-  renderComputerHand();
-  renderPlayerHand();
-
-  deck = createDeck();
-  shuffleDeck(deck);
-
-  initialCards();
+  updateBalanceDisplay();
+  updateBetDisplay();
+  currentUserDisplay();
 };
-
 const updateUIstate = () => {
   drawButton.disabled = gameOver;
   stopButton.disabled = gameOver;
 };
 
 const renderPlayerHand = () => {
-  pHandDisplay.innerHTML = "";
+  playerHandDisplay.innerHTML = "";
 
   for (let i = 0; i < playerHand.length; i++) {
     let image = document.createElement("img");
@@ -109,12 +43,12 @@ const renderPlayerHand = () => {
     image.height = 100;
     image.style.margin = "5px";
 
-    pHandDisplay.appendChild(image);
+    playerHandDisplay.appendChild(image);
   }
 };
 
 const renderComputerHand = () => {
-  cHandDisplay.innerHTML = "";
+  computerHandDisplay.innerHTML = "";
 
   for (let i = 0; i < computerHand.length; i++) {
     let image = document.createElement("img");
@@ -127,26 +61,89 @@ const renderComputerHand = () => {
       image.src = "./Images/PNG-cards/" + computerHand[i].image;
     }
 
-    cHandDisplay.appendChild(image);
+    computerHandDisplay.appendChild(image);
   }
 };
 
-const result = () => {
+const currentUserDisplay = () => {
+  document.getElementById("user").innerText = currentUser.username;
+};
+
+const updatePlayerScoreDisplay = () => {
+  counterDisplay.innerText = playerScore;
+};
+const updateComputerScoreDisplay = () => {
+  compCounterDisplay.innerText = computerScore;
+};
+const updateBetDisplay = () => {
+  yourBet.innerText = playerBet;
+};
+const updateBalanceDisplay = () => {
+  balanceDisplay.innerText = currentUser.balance;
+};
+
+////////////////
+// GAME LOGIC //
+////////////////
+
+const placeBet = () => {
+  if (!gameOver) return;
+
+  let getPlayerBet = Number(document.querySelector("#bet").value);
+
+  if (getPlayerBet > currentUser.balance) return;
+
+  playerBet = getPlayerBet;
+
+  currentUser.balance -= playerBet;
+  saveBalance();
+
+  startRound();
+};
+
+const startRound = () => {
+  gameOver = false;
+  updateUIstate();
+
+  playerHand = [];
+  computerHand = [];
+
+  playerScore = 0;
+  computerScore = 0;
+  playerAceCount = 0;
+  computerAceCount = 0;
+
+  resultDisplay.innerText = "";
+
+  updatePlayerScoreDisplay();
+  updateComputerScoreDisplay();
+  updateBalanceDisplay();
+  updateBetDisplay();
+  renderComputerHand();
+  renderPlayerHand();
+
+  deck = createDeck();
+  shuffleDeck(deck);
+
+  initialCards();
+};
+
+const endRound = () => {
   gameOver = true;
   updateUIstate();
   renderComputerHand();
   renderPlayerHand();
 
-  if (playerTotal == computerTotal) {
+  if (playerScore == computerScore) {
     resultDisplay.innerText = "Oavgjort";
     payout();
-  } else if (playerTotal > 21) {
+  } else if (playerScore > 21) {
     resultDisplay.innerText = "Över 21. Spelaren förlorar rundan";
-  } else if (playerTotal == 21) {
+  } else if (playerScore == 21) {
     resultDisplay.innerText = "Spelaren vinner rundan";
     payout();
   } else {
-    if (playerTotal > computerTotal || computerTotal > 21) {
+    if (playerScore > computerScore || computerScore > 21) {
       resultDisplay.innerText = "Spelaren vinner rundan";
       payout();
     } else {
@@ -156,31 +153,31 @@ const result = () => {
 
   resultDisplay.innerText = "\nPlacera ett bet för att starta en ny runda";
 
-  displayBalance();
+  updateBalanceDisplay();
   playerBet = 0;
-  displayBet();
+  updateBetDisplay();
 };
 
 const playerTurn = () => {
-  if (playerTotal < 21) {
+  if (playerScore < 21) {
     if (deck.length == 0) {
-      result();
+      endRound();
     }
 
     drawCardToPlayer();
 
-    if (playerTotal >= 21) {
-      result();
+    if (playerScore >= 21) {
+      endRound();
     }
   }
 };
 
 const computerTurn = () => {
-  while (computerTotal < 17) {
+  while (computerScore < 17) {
     drawCardToComputer();
   }
 
-  result();
+  endRound();
 };
 
 const initialCards = () => {
@@ -189,58 +186,58 @@ const initialCards = () => {
   drawCardToComputer();
   drawCardToComputer();
 
-  if (playerTotal == 21 || computerTotal > 21) result();
+  if (playerScore == 21 || computerScore > 21) endRound();
 };
 
 const drawCardToPlayer = () => {
-  playerTotal += deck[0].value;
+  playerScore += deck[0].value;
   playerHand.push(deck[0]);
 
   if (deck[0].rank == "ace") {
-    playerHandAces++;
+    playerAceCount++;
   }
 
-  while (playerTotal > 21 && playerHandAces > 0) {
-    playerTotal -= 10;
-    playerHandAces--;
+  while (playerScore > 21 && playerAceCount > 0) {
+    playerScore -= 10;
+    playerAceCount--;
   }
 
   deck.shift();
-  updateDisplay();
+  updatePlayerScoreDisplay();
   renderPlayerHand();
 };
 
 const drawCardToComputer = () => {
-  computerTotal += deck[0].value;
+  computerScore += deck[0].value;
   computerHand.push(deck[0]);
 
   if (deck[0].rank == "ace") {
-    computerHandAces++;
+    computerAceCount++;
   }
 
-  while (computerTotal > 21 && computerHandAces > 0) {
-    computerTotal -= 10;
-    computerHandAces--;
+  while (computerScore > 21 && computerAceCount > 0) {
+    computerScore -= 10;
+    computerAceCount--;
   }
 
   deck.shift();
-  updateCompDisplay();
+  updateComputerScoreDisplay();
   renderComputerHand();
 };
 
 const payout = () => {
-  if (playerTotal == computerTotal) {
+  if (playerScore == computerScore) {
     currentUser.balance += playerBet;
-    updateBalanceInLS();
+    saveBalance();
   } else {
     currentUser.balance += playerBet * 2;
-    updateBalanceInLS();
+    saveBalance();
   }
 };
 
 const addBalance = () => {
   currentUser.balance += Number(document.querySelector("#deposit").value);
-  updateBalanceInLS();
+  saveBalance();
 };
 
 const createDeck = () => {
@@ -299,13 +296,29 @@ const shuffleDeck = (myDeck) => {
   }
 };
 
+/////////////
+// STORAGE //
+/////////////
+const saveBalance = () => {
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+  let users = JSON.parse(localStorage.getItem("user")) || [];
+
+  for (let user of users) {
+    if (currentUser.username == user.username) {
+      user.balance = currentUser.balance;
+    }
+  }
+
+  localStorage.setItem("user", JSON.stringify(users));
+};
+
 //------------------//
 //  Event listeners //
 //------------------//
 
 document.querySelector("#depositButton").addEventListener("click", () => {
   addBalance();
-  displayBalance();
+  updateBalanceDisplay();
 });
 
 document.querySelector("#draw").addEventListener("click", () => {
@@ -326,3 +339,9 @@ document.querySelector("#logout").addEventListener("click", () => {
   localStorage.removeItem("currentUser");
   location.href = "index.html";
 });
+
+//----------------//
+// Initiate Game  //
+//----------------//
+
+initiateGameUI();
