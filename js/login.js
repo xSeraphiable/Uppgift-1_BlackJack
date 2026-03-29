@@ -1,7 +1,9 @@
 const usernameForm = document.getElementById("username");
 const pwdForm = document.getElementById("pwd");
 
-document.querySelector("#submit").addEventListener("click", () => {
+document.querySelector("#loginForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+
   const username = usernameForm.value;
   const password = pwdForm.value;
   
