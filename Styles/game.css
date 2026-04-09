@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   font-family: Arial, sans-serif;
   background-color: #4A5D23;
@@ -65,39 +64,41 @@ input[type=number] {
   border-radius: 5px;
 }
 
-/* 1. Ta bort standardmargins */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
 }
 
-/* 2. Body som flex-column */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* 3. Main tar kvarvarande höjd och centrerar spelet */
 main {
   flex: 1;
   display: flex;
-  justify-content: center; /* horisontellt centrerat */
-  align-items: center; /* vertikalt centrerat */
+  justify-content: center;
+  align-items: center;
 }
 
-/* 4. Container med spelet */
 .containerGame {
+  flex: 2;
   display: flex;
   flex-direction: column;
-  gap: 20px; /* lite mellanrum mellan sektioner */
+  gap: 20px;
   width: 90%;
-  max-width: 800px; /* lagom bredd på stora skärmar */
+  max-width: 800px;
   text-align: center;
 }
 
-.player, .computer {
+.result {
+  margin: 0px;
+  gap: 0;
+}
+
+.computer {
   min-height: 220px;
   background-color: #7c8f52;
   color: #000000;
@@ -107,20 +108,58 @@ main {
   text-align: center;
 }
 
-/* 5. Footer/banner längst ner */
-.gameFooter {
+.playerArea {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  min-height: 220px;
+  background-color: #7c8f52;
+  color: #000000;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
 }
 
-.userinfo, .balanceDiv {
-  width: 100%;
-  gap: 20px;
-  background-color: #222;
-  color: white;
-  text-align: center;
+.player {
+  min-height: 220px;
+}
+
+.controls, .betting {
+  margin: 5px;
+}
+
+.gameFooter {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  width: 100%;
+}
+
+.footerContent {
+  max-width: 800px;
+  margin: 0 auto;
+  gap: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balanceSection {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.balanceInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userinfo {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 /*# sourceMappingURL=game.css.map */
