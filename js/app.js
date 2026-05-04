@@ -10,8 +10,9 @@ let playerAceCount = 0;
 let computerAceCount = 0;
 
 const counterDisplay = document.getElementById("points");
-const compCounterDisplay = document.getElementById("computerPoints");
+// const compCounterDisplay = document.getElementById("computerPoints");
 const resultDisplay = document.getElementById("resultMessage");
+const result = document.querySelector(".result");
 const playerBetting = document.getElementById("playerBetting");
 const yourBet = document.getElementById("yourBet");
 const balanceDisplay = document.getElementById("balance");
@@ -72,9 +73,9 @@ const currentUserDisplay = () => {
 const updatePlayerScoreDisplay = () => {
   counterDisplay.innerText = playerScore;
 };
-const updateComputerScoreDisplay = () => {
-  compCounterDisplay.innerText = computerScore;
-};
+// const updateComputerScoreDisplay = () => {
+//   compCounterDisplay.innerText = computerScore;
+// };
 const updateBetDisplay = () => {
   yourBet.innerText = playerBet;
 };
@@ -114,9 +115,10 @@ const startRound = () => {
   computerAceCount = 0;
 
   resultDisplay.innerText = "";
+  result.classList.remove("show");
 
   updatePlayerScoreDisplay();
-  updateComputerScoreDisplay();
+  // updateComputerScoreDisplay();
   updateBalanceDisplay();
   updateBetDisplay();
   renderComputerHand();
@@ -133,25 +135,30 @@ const endRound = () => {
   updateUIstate();
   renderComputerHand();
   renderPlayerHand();
+  result.classList.add("show");
+
+  let message = "";
 
   if (playerScore == computerScore) {
-    resultDisplay.innerText = "Oavgjort";
+    message = "Oavgjort!";
+
     payout();
   } else if (playerScore > 21) {
-    resultDisplay.innerText = "Över 21. Spelaren förlorar rundan";
+    message = "Du förlorade!";
   } else if (playerScore == 21) {
-    resultDisplay.innerText = "Spelaren vinner rundan";
+    message = "Du vann!";
     payout();
   } else {
     if (playerScore > computerScore || computerScore > 21) {
-      resultDisplay.innerText = "Spelaren vinner rundan";
+      message = "Du vann!";
       payout();
     } else {
-      resultDisplay.innerText = "Datorn vinner rundan";
+      message = "Du förlorade!";
     }
   }
 
-  resultDisplay.innerText = "\nPlacera ett bet för att starta en ny runda";
+  resultDisplay.innerText = `${message}\nSatsa för att starta en ny runda`;
+  
 
   updateBalanceDisplay();
   playerBet = 0;
@@ -221,7 +228,7 @@ const drawCardToComputer = () => {
   }
 
   deck.shift();
-  updateComputerScoreDisplay();
+  // updateComputerScoreDisplay();
   renderComputerHand();
 };
 

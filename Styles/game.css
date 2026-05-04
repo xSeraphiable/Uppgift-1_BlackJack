@@ -64,7 +64,8 @@ input[type=number] {
   border-radius: 5px;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   height: 100%;
@@ -91,11 +92,29 @@ main {
   width: 90%;
   max-width: 800px;
   text-align: center;
+  position: relative;
 }
 
 .result {
-  margin: 0px;
-  gap: 0;
+  position: absolute;
+  top: 34%;
+  left: 38%;
+  width: 20%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border: solid 2px white;
+  z-index: 100;
+  font-size: 1em;
+  font-variant-caps: all-petite-caps;
+  opacity: 0;
+}
+
+.result.show {
+  opacity: 1;
 }
 
 .computer {
@@ -124,7 +143,8 @@ main {
   min-height: 220px;
 }
 
-.controls, .betting {
+.controls,
+.betting {
   margin: 5px;
 }
 
