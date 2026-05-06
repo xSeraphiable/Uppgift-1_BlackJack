@@ -7,7 +7,7 @@
   Uppgiften var att skapa en webbapplikation i css, html och vanilla javascript där användaren kan spela ett enkelt black jack spel mot datorn.
 </p> 
 <p>
-  Spelet visar korten visuellt och låter spelaren satsa pengar. Användaren kan logga in och användaruppgifter samt saldo sparas i localStorage.
+  Spelet visar korten visuellt och låter spelaren satsa pengar. Användaren kan logga in och användaruppgifter samt saldo sparas i localStorage i din webbläsare.
 </p>
 
 
