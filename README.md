@@ -1,4 +1,4 @@
-*Projektet är inte färdigt ännu!*
+
 <h1>Vad är detta?</h1>
 <p>
   Ett skolprojekt i kursen webbutveckling på IT-Högskolan i Göteborg.
@@ -15,3 +15,6 @@
 
 
 ![blackjack](https://github.com/user-attachments/assets/485de86b-aa6f-45e9-ab3b-bbb9ef6bee44)
+
+<img width="812" height="677" alt="image" src="https://github.com/user-attachments/assets/4ec70d76-8015-4be6-a748-161118390cc0" />
+
