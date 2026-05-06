@@ -133,24 +133,23 @@ const endRound = () => {
   result.classList.add("show");
 
   let message = "";
+  let winner = "";
 
-  if (playerScore == computerScore) {
-    message = "Oavgjort!";
+if (playerScore > 21) {
+  winner = "computer";
+  message = "Du blev tjock!";
+} else if (computerScore > 21 || playerScore > computerScore) {
+  winner = "player";
+  message = "Du vann!";
+} else if (playerScore === computerScore) {
+  winner = "draw";
+  message = "Oavgjort!";
+} else {
+  winner = "computer";
+  message = "Datorn vann!";
+}
 
-    payout();
-  } else if (playerScore > 21) {
-    message = "Du förlorade!";
-  } else if (playerScore == 21) {
-    message = "Du vann!";
-    payout();
-  } else {
-    if (playerScore > computerScore || computerScore > 21) {
-      message = "Du vann!";
-      payout();
-    } else {
-      message = "Du förlorade!";
-    }
-  }
+  if(winner == "player" || winner == "draw") {payout();}
 
   resultDisplay.innerText = `${message}\nSatsa för att starta en ny runda`;
 
@@ -160,17 +159,17 @@ const endRound = () => {
 };
 
 const playerTurn = () => {
-  if (playerScore < 21) {
-    if (deck.length == 0) {
-      endRound();
-    }
+  if(gameOver) return;
 
-    drawCardToPlayer();
+drawCardToPlayer();
 
-    if (playerScore >= 21) {
-      endRound();
-    }
+if (playerScore >= 21) {
+  if (playerScore > 21) {
+    endRound();
+  } else {
+    computerTurn();
   }
+}
 };
 
 const computerTurn = () => {
@@ -187,7 +186,9 @@ const initialCards = () => {
   drawCardToComputer();
   drawCardToComputer();
 
-  if (playerScore == 21 || computerScore > 21) endRound();
+  if (playerScore >= 21) {
+    computerTurn();
+  }
 };
 
 const drawCardToPlayer = () => {
