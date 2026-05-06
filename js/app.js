@@ -10,7 +10,6 @@ let playerAceCount = 0;
 let computerAceCount = 0;
 
 const counterDisplay = document.getElementById("points");
-// const compCounterDisplay = document.getElementById("computerPoints");
 const resultDisplay = document.getElementById("resultMessage");
 const result = document.querySelector(".result");
 const playerBetting = document.getElementById("playerBetting");
@@ -73,9 +72,6 @@ const currentUserDisplay = () => {
 const updatePlayerScoreDisplay = () => {
   counterDisplay.innerText = playerScore;
 };
-// const updateComputerScoreDisplay = () => {
-//   compCounterDisplay.innerText = computerScore;
-// };
 const updateBetDisplay = () => {
   yourBet.innerText = playerBet;
 };
@@ -118,7 +114,6 @@ const startRound = () => {
   result.classList.remove("show");
 
   updatePlayerScoreDisplay();
-  // updateComputerScoreDisplay();
   updateBalanceDisplay();
   updateBetDisplay();
   renderComputerHand();
@@ -158,7 +153,6 @@ const endRound = () => {
   }
 
   resultDisplay.innerText = `${message}\nSatsa för att starta en ny runda`;
-  
 
   updateBalanceDisplay();
   playerBet = 0;
@@ -228,7 +222,7 @@ const drawCardToComputer = () => {
   }
 
   deck.shift();
-  // updateComputerScoreDisplay();
+
   renderComputerHand();
 };
 
