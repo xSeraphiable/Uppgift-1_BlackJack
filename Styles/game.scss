@@ -58,7 +58,7 @@ main {
 
 .computer {
   min-height: 220px;
-  background-color: #7c8f52;
+  background-color: base.$bg-color2;
   color: #000000;
   padding: 20px;
   border-radius: 10px;
@@ -70,7 +70,7 @@ main {
   display: flex;
   flex-direction: column;
   min-height: 220px;
-  background-color: #7c8f52;
+  background-color: base.$bg-color2;
   color: #000000;
   padding: 20px;
   border-radius: 10px;
@@ -116,27 +116,68 @@ main {
   flex-direction: column;
 }
 
-// .depositControls input{
-//     width: 100px;
-//   padding: 6px 8px;
-//   border-radius: 6px;
-
-//   border: none;
-//   outline: none;
-// }
-
-// .userinfo, .balanceInfo {
-//   width: 100%;
-//   gap: 20px;
-//   padding: base.$lp;
-//   background-color: #222;
-//   color: white;
-//   align-items: center;
-//   display: flex;
-// }
 
 .userinfo {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+div.rulesModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;  
+
+  &.is-visible {
+    display: flex; 
+  }
+}
+
+.rulesModal-box {
+  background-color: base.$bg-color;
+  border: solid 2px base.$bg-color2;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+} 
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end; 
+  width: 100%;
+}
+
+.modal-close {
+  background: base.$accent1;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  line-height: 1;
+  
+  &:hover {
+    background-color: base.$accent2; 
+  }
+}
+
+.rulesText {
+  font-size: 1em;
+  white-space: pre-wrap;
+  
+}
+
+.compact {
+  margin: 0;
 }

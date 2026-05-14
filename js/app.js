@@ -19,6 +19,7 @@ const drawButton = document.getElementById("draw");
 const stopButton = document.getElementById("stop");
 const playerHandDisplay = document.getElementById("pHand");
 const computerHandDisplay = document.getElementById("cHand");
+const rulesButton = document.getElementById("rulesbtn");
 
 ////////////////////
 // USER INTERFACE //
@@ -206,7 +207,9 @@ const drawCardToPlayer = () => {
 
   deck.shift();
   updatePlayerScoreDisplay();
-  renderPlayerHand();
+setTimeout(() => {
+    renderPlayerHand();
+  }, 300);
 };
 
 const drawCardToComputer = () => {
@@ -224,7 +227,9 @@ const drawCardToComputer = () => {
 
   deck.shift();
 
-  renderComputerHand();
+  setTimeout(() => {
+    renderComputerHand();
+  }, 300);
 };
 
 const payout = () => {
@@ -340,6 +345,43 @@ document.querySelector("#betButton").addEventListener("click", () => {
 document.querySelector("#logout").addEventListener("click", () => {
   localStorage.removeItem("currentUser");
   location.href = "index.html";
+});
+
+document.querySelector("#rulesbtn").addEventListener("click", () => {
+
+  let rulesMessage = `
+   <h3>Regler för Blackjack</h3>
+  <p>Målet i Blackjack är att få en hand som är närmare 21 än datorns hand, utan att gå över 21.</p>
+  
+  <h3>Kortvärden:</h3>
+  <p class="compact"><strong>Ess:</strong> 11 eller 1</p>
+  <p class="compact"><strong>Knekt, Dam, Kung:</strong> 10</p>
+  <p class="compact"><strong>2-10:</strong> lika med sitt nummer</p>
+
+
+  <h3>Regler:</h3>
+  <ol>
+    <li>Spelaren drar kort tills hen stannar eller går över 21.</li>
+    <li>Datorn drar kort tills den har minst 17 poäng.</li>
+    <li>Den som är närmast 21 utan att gå över vinner.</li>
+  </ol>
+  
+  <p><em>Sätt in pengar och satsa för att starta en runda!</em></p>
+`;
+
+  document.getElementById("rulesText").innerHTML = rulesMessage;
+  document.getElementById("rulesModal").classList.add("is-visible");
+
+});
+
+document.querySelector("#closeBtn").addEventListener("click", () => {
+  document.getElementById("rulesModal").classList.remove("is-visible");
+});
+
+document.getElementById("rulesModal").addEventListener("click", (event) => {
+  if (event.target.id === "rulesModal") {
+    document.getElementById("rulesModal").classList.remove("is-visible");
+  }
 });
 
 //----------------//

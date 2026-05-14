@@ -182,4 +182,60 @@ main {
   gap: 20px;
 }
 
+div.rulesModal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+div.rulesModal-overlay.is-visible {
+  display: flex;
+}
+
+.rulesModal-box {
+  background-color: #4A5D23;
+  border: solid 2px #7c8f52;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.modal-close {
+  background: #e67e22;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px 10px;
+  line-height: 1;
+}
+.modal-close:hover {
+  background-color: #d35400;
+}
+
+.rulesText {
+  font-size: 1em;
+  white-space: pre-wrap;
+}
+
+.compact {
+  margin: 0;
+}
+
 /*# sourceMappingURL=game.css.map */
